@@ -1,0 +1,59 @@
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+<script type="text/javascript" src="/js/jquery.swipebox.min.js"></script>
+<script type="text/javascript" src="/js/jquery.stellar.js"></script>
+<script type="text/javascript" src="/js/swiper.jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.waypoints.min.js"></script>
+<script type="text/javascript" src="/js/sticky.js"></script>
+<script type="text/javascript" src="/js/isotope.pkgd.min.js"></script>
+<script type="text/javascript" src="/js/chateau-script.js"></script>
+{% if page.ref == 'viaggi' %}
+<script>
+    var $grid = $('.blog-grid');
+    $(document).ready(function () {
+        function getHashFilter() {
+            var matches = location.hash.match(/filter=([^&]+)/i);
+            var hashFilter = matches && matches[1];
+            return hashFilter && decodeURIComponent(hashFilter);
+        }
+
+        var $filterButtonGroup = $('.blog-filters');
+        $filterButtonGroup.on('click', 'a', function () {
+            var filterAttr = $(this).attr('data-filter');
+            // set filter in hash
+            location.hash = 'filter=' + encodeURIComponent(filterAttr);
+        });
+
+        var isIsotopeInit = false;
+        function onHashchange() {
+            var hashFilter = getHashFilter();
+            if (!hashFilter && isIsotopeInit) {
+                return;
+            }
+            isIsotopeInit = true;
+            $grid.isotope({
+                itemSelector: '.blog-grid-entry',
+                masonry: {
+                    columnWidth: '.blog-grid-sizer',
+                    gutter: '.blog-gutter-sizer',
+                    isFitWidth: true
+                },
+                filter: hashFilter
+            });
+            if (hashFilter) {
+                $filterButtonGroup.find('.active').removeClass('active');
+                var $current = $filterButtonGroup.find('[data-filter="' + hashFilter + '"]');
+                $current.parent().addClass('active');
+            }
+        }
+        $(window).on('hashchange', onHashchange);
+        onHashchange();
+    });
+
+    $(window).load(function () {
+        $grid.isotope('layout');
+    }); 
+</script>
+{% endif %}
