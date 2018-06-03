@@ -2059,3 +2059,7 @@ table#cart {
 #sec-icons .fa {
   color: #b1af6a;
 }
+
+.color-light-shadow {
+  text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.75);
+}
