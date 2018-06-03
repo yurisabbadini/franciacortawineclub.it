@@ -1,0 +1,30 @@
+---
+layout: page
+title: 2016 Umbria e Marche
+permalink: /2016-umbria-marche
+description:
+ref: 2016-umbria-marche
+---
+{% include gallery_nav.html %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="swiper-container gallery-top">
+            <div class="swiper-wrapper">
+                {% for image in site.static_files %}
+                    {% if image.path contains 'img/viaggi/2016-umbria-marche' %}
+                        <div class="swiper-slide" style="background-image:url({{ site.baseurl }}{{ image.path }})"></div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="swiper-container gallery-thumbs">
+            <div class="swiper-wrapper">
+                {% for image in site.static_files %}
+                    {% if image.path contains 'img/viaggi/2016-umbria-marche' %}
+                        <div class="swiper-slide" style="background-image:url({{ site.baseurl }}{{ image.path }})"></div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
