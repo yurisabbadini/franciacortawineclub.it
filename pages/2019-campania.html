@@ -1,0 +1,30 @@
+---
+layout: page
+title: 2019 Campania
+permalink: /2019-campania
+description:
+ref: 2019-campania
+---
+{% include gallery_nav.html %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="swiper-container gallery-top">
+            <div class="swiper-wrapper">
+                {% for image in site.static_files %}
+                    {% if image.path contains 'img/viaggi/2019-campania' %}
+                        <div class="swiper-slide" style="background-image:url({{ site.baseurl }}{{ image.path }})"></div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="swiper-container gallery-thumbs">
+            <div class="swiper-wrapper">
+                {% for image in site.static_files %}
+                    {% if image.path contains 'img/viaggi/2019-campania' %}
+                        <div class="swiper-slide" style="background-image:url({{ site.baseurl }}{{ image.path }})"></div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
