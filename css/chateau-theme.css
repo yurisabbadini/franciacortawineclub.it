@@ -1703,6 +1703,10 @@ table#cart {
 .blog-grid-sizer {
   width: 300px;
 }
+.blog-grid-entry-news {
+  width: 90% !important;
+  margin: 0 auto;
+}
 .blog-gutter-sizer {
   width: 25px;
 }
