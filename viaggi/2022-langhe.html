@@ -1,0 +1,23 @@
+---
+layout: page
+title: 2022 Langhe
+permalink: /2022-langhe
+description:
+ref: 2022-piemonte
+---
+<div class="gallery dark">
+    <ul id="lightgallery" class="list-unstyled row" style="margin-left: 0px;">
+        {% for image in site.static_files %}
+            {% if image.path contains 'img/viaggi/2022-langhe' %}
+                <li class="col-xs-6 col-sm-4 col-md-3" data-responsive="{{ site.baseurl }}{{ image.path }}" data-src="{{ site.baseurl }}{{ image.path }}">
+                    <a href="">
+                        <img class="img-responsive" src="{{ site.baseurl }}{{ image.path }}">
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+<script>
+    lightGallery(document.getElementById('lightgallery'));
+</script>
