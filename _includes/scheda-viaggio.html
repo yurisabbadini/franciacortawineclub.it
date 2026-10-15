@@ -1,0 +1,6 @@
+{%- include foto-viaggio.html viaggio=include.viaggio -%}
+<a class="card" href="{{ include.viaggio.url }}">
+    <span class="card__img"><img src="{{ copertina | uri_escape }}" alt="" loading="lazy" decoding="async"></span>
+    <h3 class="card__title">{{ include.viaggio.title }}</h3>
+    <p class="card__meta">{% include mese.html date=include.viaggio.date solo_mese=include.solo_mese %}<span class="sep" aria-hidden="true"></span>{{ foto.size }} foto</p>
+</a>

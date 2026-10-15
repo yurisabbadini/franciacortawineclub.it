@@ -1,0 +1,68 @@
+---
+layout: page
+title: Notiziario
+permalink: /notiziario
+ref: notiziario
+---
+{%- comment -%} I contenuti sono in _data/notiziario.yml {%- endcomment -%}
+{%- assign n = site.data.notiziario -%}
+{%- assign appuntamenti = n.appuntamenti | sort: "data" -%}
+{%- assign oggi = site.time | date: "%Y%m%d" | plus: 0 -%}
+{%- assign aggiornato_m = n.aggiornato | date: "%-m" | minus: 1 -%}
+{%- assign passati = 0 -%}
+{%- for e in appuntamenti -%}
+    {%- assign fine = e.fine | default: e.data | date: "%Y%m%d" | plus: 0 -%}
+    {%- if fine < oggi %}{% assign passati = passati | plus: 1 %}{% endif -%}
+{%- endfor %}
+
+<header class="wrap page-head">
+    <h1 class="page-head__title">Notiziario</h1>
+    <p class="page-head__intro">{{ n.periodo }}</p>
+    <p class="news-updated">Aggiornato il {{ n.aggiornato | date: "%-d" }} {{ site.mesi[aggiornato_m] }} {{ n.aggiornato | date: "%Y" }}</p>
+    <p class="page-head__actions no-print">
+        <button class="button" type="button" data-print>Stampa o salva in PDF</button>
+    </p>
+</header>
+
+<div class="wrap news-page">
+    <section class="news-section" aria-labelledby="titolo-prossimi">
+        <h2 class="section-title" id="titolo-prossimi">Prossimi appuntamenti</h2>
+        <ol class="events" data-events="upcoming">
+            {%- for e in appuntamenti %}
+            {%- assign fine = e.fine | default: e.data | date: "%Y%m%d" | plus: 0 %}
+            {%- if fine >= oggi %}
+            {% include appuntamento.html e=e %}
+            {%- endif %}
+            {%- endfor %}
+        </ol>
+        <p class="events__empty" hidden>Per ora non ci sono altri appuntamenti in programma: il prossimo notiziario arriva presto.</p>
+    </section>
+
+    {%- if n.ordini %}
+    <section class="news-section" aria-labelledby="titolo-ordini">
+        <h2 class="section-title" id="titolo-ordini">Ordini del vino</h2>
+        <div class="news-text">{{ n.ordini | markdownify }}</div>
+    </section>
+    {%- endif %}
+
+    <section class="news-section news-section--past" data-past-section aria-labelledby="titolo-passati"{% if passati == 0 %} hidden{% endif %}>
+        <h2 class="section-title" id="titolo-passati">Già svolti</h2>
+        <ol class="events events--past" data-events="past">
+            {%- for e in appuntamenti reversed %}
+            {%- assign fine = e.fine | default: e.data | date: "%Y%m%d" | plus: 0 %}
+            {%- if fine < oggi %}
+            {% include appuntamento.html e=e %}
+            {%- endif %}
+            {%- endfor %}
+        </ol>
+    </section>
+
+    <aside class="join" aria-labelledby="titolo-partecipare">
+        <h2 class="join__title" id="titolo-partecipare">Come partecipare</h2>
+        <div class="join__text">
+            <p>Per aderire alle nostre iniziative basta condividere la passione per il vino, la gastronomia e i viaggi: non serve altro, e sarai il benvenuto tra noi.</p>
+            <p>Per iscriverti a un appuntamento basta un messaggio. Avvisi e aggiornamenti arrivano sul gruppo WhatsApp del club; ci trovi anche su Instagram: <a href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener">@{{ site.instagram }}</a></p>
+        </div>
+    </aside>
+    <p class="print-only">www.franciacortawineclub.it/notiziario</p>
+</div>

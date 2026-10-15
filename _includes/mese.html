@@ -1,0 +1,7 @@
+{%- comment -%}
+  Scrive il mese (e l'anno) di una data in italiano: "settembre 2026".
+  Uso: {% include mese.html date=viaggio.date %}  oppure  solo_mese=true
+{%- endcomment -%}
+{%- assign mese_n = include.date | date: "%-m" | minus: 1 -%}
+{{- site.mesi[mese_n] -}}
+{%- unless include.solo_mese %} {{ include.date | date: "%Y" }}{% endunless -%}

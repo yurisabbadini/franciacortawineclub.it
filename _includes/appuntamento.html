@@ -1,0 +1,78 @@
+{%- comment -%}
+  Un appuntamento del notiziario (_data/notiziario.yml).
+  Uso: {% include appuntamento.html e=appuntamento %}  oppure  breve=true (home)
+  data-fine serve a site.js per spostare gli appuntamenti passati.
+{%- endcomment -%}
+{%- assign e = include.e -%}
+{%- assign fine = e.fine | default: e.data -%}
+{%- assign mese_n = e.data | date: "%-m" | minus: 1 -%}
+{%- assign giorno_n = e.data | date: "%w" | plus: 0 -%}
+{%- capture id_evento %}{{ e.data | date: "%Y-%m-%d" }}-{{ e.titolo | slugify }}{% endcapture -%}
+{%- capture giorni_testo -%}
+    {{- e.data | date: "%-d" -}}
+    {%- if e.fine %}–{{ e.fine | date: "%-d" }}{% endif -%}
+{%- endcapture -%}
+{%- capture mesi_testo -%}
+    {{- site.mesi[mese_n] -}}
+    {%- if e.fine -%}
+        {%- assign mese_fine_n = e.fine | date: "%-m" | minus: 1 -%}
+        {%- if mese_fine_n != mese_n %} – {{ site.mesi[mese_fine_n] }}{% endif -%}
+    {%- endif -%}
+{%- endcapture -%}
+
+{%- if include.breve %}
+<li data-fine="{{ fine | date: '%Y-%m-%d' }}">
+    <a class="news-row" href="/notiziario#{{ id_evento }}">
+        <span class="news-row__when">
+            {%- if e.quando -%}
+            {{ e.quando }}
+            {%- else -%}
+            {{ giorni_testo }} {{ mesi_testo }}
+            {%- unless e.fine %}<small>{{ site.giorni[giorno_n] }}{% if e.ora %}, ore {{ e.ora }}{% endif %}</small>{% endunless -%}
+            {%- endif -%}
+        </span>
+        <span class="news-row__what">
+            <small>{{ e.tipo }}</small>
+            <span class="news-row__title">{{ e.titolo }}</span>
+            {%- if e.luogo %}<small class="news-row__place">{{ e.luogo }}</small>{% endif %}
+        </span>
+    </a>
+</li>
+{%- else %}
+<li class="event" id="{{ id_evento }}" data-fine="{{ fine | date: '%Y-%m-%d' }}">
+    <p class="event__when">
+        {%- if e.quando %}
+        <span class="event__day event__day--text">{{ e.quando }}</span>
+        {%- else %}
+        <span class="event__day">{{ giorni_testo }}</span>
+        <span class="event__month">{{ mesi_testo }} {{ fine | date: "%Y" }}</span>
+        {%- unless e.fine %}
+        <span class="event__weekday">{{ site.giorni[giorno_n] }}</span>
+        {%- if e.ora %}
+        <span class="event__weekday">ore {{ e.ora }}</span>
+        {%- endif %}
+        {%- endunless %}
+        {%- endif %}
+    </p>
+    <div class="event__what">
+        <p class="event__type">{{ e.tipo }}</p>
+        <h3 class="event__title">{{ e.titolo }}</h3>
+        {%- if e.luogo %}
+        <p class="event__place"><a href="https://www.google.com/maps/search/?api=1&amp;query={{ e.luogo | url_encode }}" target="_blank" rel="noopener">{{ e.luogo }}</a></p>
+        {%- endif %}
+        {%- if e.iscrizioni or e.note %}
+        <p class="event__info">
+            {%- if e.iscrizioni %}<span class="event__status event__status--{{ e.iscrizioni }}">Iscrizioni {{ e.iscrizioni }}</span>{% endif -%}
+            {%- if e.iscrizioni and e.note %}<span class="sep" aria-hidden="true"></span>{% endif -%}
+            {{- e.note -}}
+        </p>
+        {%- endif %}
+        {%- if e.viaggio %}
+        {%- assign galleria = site.viaggi | where: "slug", e.viaggio | first %}
+        {%- if galleria %}
+        <p class="event__photos"><a class="more" href="{{ galleria.url }}">Guarda le foto <span aria-hidden="true">→</span></a></p>
+        {%- endif %}
+        {%- endif %}
+    </div>
+</li>
+{%- endif %}

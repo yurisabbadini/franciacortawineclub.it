@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it"{% if page.ref == "home" or page.ref == "notiziario" %} data-versione="{{ site.time | date: '%Y%m%d%H%M%S' }}"{% endif %}>
 {% include head.html %}
-<body>
-	<div class="container-fluid" id="main-container">
-		<div class="row" id="main-row">
-			{% include header.html %}
-			{{ content }}
-			{% include footer.html %}
-		</div>
-	</div>
-	{% include js.html %}
+<body class="{% if page.ref == 'home' %}is-home{% endif %}">
+	{% include header.html %}
+	<main id="contenuto">
+		{{ content }}
+	</main>
+	{% include footer.html %}
+	<script src="/js/site.js?v={{ site.time | date: '%Y%m%d%H%M' }}" defer></script>
 </body>
 </html>

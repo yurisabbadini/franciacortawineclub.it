@@ -16,8 +16,10 @@
 title: Franciacorta Wine Club
 email: info@franciacortawineclub.it
 description: >- # this means to ignore newlines until "baseurl:"
+  Un gruppo di amici con la passione per il vino, la gastronomia e i viaggi.
+  Le foto dei nostri viaggi enogastronomici in Italia e nel mondo.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://www.franciacortawineclub.it" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
 sass:
@@ -28,4 +30,25 @@ theme: minima
 exclude:
   - Gemfile
   - Gemfile.lock
+  - README.md
 include: ['_pages', 'viaggi', 'notiziario']
+
+# Il notiziario è in _data/notiziario.yml (istruzioni in README.md)
+instagram: franciacorta_wine_club
+
+# Viaggi: un file per viaggio in _viaggi/ (es. _viaggi/2026-bordeaux.html)
+# e le foto in img/viaggi/<stesso nome>/. Istruzioni in README.md
+collections:
+  viaggi:
+    output: true
+    permalink: /:name
+
+defaults:
+  - scope:
+      path: ""
+      type: viaggi
+    values:
+      layout: viaggio
+
+mesi: [gennaio, febbraio, marzo, aprile, maggio, giugno, luglio, agosto, settembre, ottobre, novembre, dicembre]
+giorni: [domenica, lunedì, martedì, mercoledì, giovedì, venerdì, sabato]

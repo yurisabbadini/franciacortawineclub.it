@@ -1,0 +1,66 @@
+# Notiziario del club: modificando questo file si aggiornano la pagina /notiziario
+# e i "Prossimi appuntamenti" in home. Gli appuntamenti passati finiscono da soli
+# in fondo alla pagina, sotto "Già svolti". Istruzioni in README.md
+
+periodo: "Agosto – Dicembre 2026"
+aggiornato: 2026-08-13
+
+# Campi di ogni appuntamento:
+#   tipo, titolo, data (AAAA-MM-GG)   obbligatori
+#   ora          es. "12.30" (tra virgolette)
+#   fine         ultimo giorno, se dura più giorni
+#   quando       testo da mostrare al posto della data, es. "Primavera 2027";
+#                in quel caso in "data" metti l'ultimo giorno possibile
+#   luogo        diventa un link a Google Maps
+#   iscrizioni   aperte / chiuse
+#   note         testo libero
+#   viaggio      nome della galleria (es. 2026-bordeaux) per il link alle foto
+appuntamenti:
+  - tipo: "Pranzo"
+    titolo: "Pesce in bolla"
+    data: 2026-08-23
+    ora: "12.30"
+    luogo: "Ristorante La Loggia, Rovato"
+    iscrizioni: aperte
+    note: "Basta un messaggio entro il 14 agosto."
+
+  - tipo: "Gita"
+    titolo: "Bordeaux"
+    data: 2026-09-09
+    fine: 2026-09-13
+    iscrizioni: chiuse
+    viaggio: 2026-bordeaux
+
+  - tipo: "Gita"
+    titolo: "Bologna Champagne Experience"
+    data: 2026-10-05
+    iscrizioni: aperte
+    note: "Pulmino gratuito offerto dal gruppo, massimo 18 posti. Si prenota fino a esaurimento posti."
+
+  - tipo: "Cena"
+    titolo: "Bordeaux"
+    data: 2026-10-27
+    luogo: "Selva Bistrot, Brescia"
+    iscrizioni: aperte
+    note: "Basta un messaggio."
+
+  - tipo: "Pranzo"
+    titolo: "Bolliti & Champagne"
+    data: 2026-12-13
+    ora: "12.30"
+    luogo: "Ristorante La Loggia, Rovato"
+    iscrizioni: aperte
+    note: "Basta un messaggio."
+
+  - tipo: "Gita"
+    titolo: "Portogallo"
+    quando: "Primavera 2027"
+    data: 2027-06-20
+    iscrizioni: aperte
+    note: "Si può già versare l’acconto di 100 €. Posti limitati."
+
+# Testo libero (si possono usare paragrafi separati da una riga vuota)
+ordini: |
+  Come sempre in autunno ricominciano gli ordini del vino.
+
+  Avvisi, aggiornamenti e prezzi arrivano sul gruppo WhatsApp del club.

@@ -17,8 +17,14 @@ permalink: /sitemaps.xml
       </url>
     {% endif %}
   {% endfor %}
+  {% for viaggio in site.viaggi %}
+      <url>
+        <loc>https://www.franciacortawineclub.it{{ viaggio.url }}</loc>
+        <changefreq>monthly</changefreq>
+      </url>
+  {% endfor %}
   {% for page in site.pages %}
-    {% if page.id contains "404" %}{% else %}
+    {% if page.url contains "404" or page.sitemap == false %}{% else %}
       <url>
         <loc>https://www.franciacortawineclub.it{{ page.url }}</loc>
         {% assign versions=site.pages | where:"ref", page.ref %}

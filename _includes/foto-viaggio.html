@@ -1,0 +1,12 @@
+{%- comment -%}
+  Trova le foto di un viaggio (cartella img/viaggi/<nome del file del viaggio>/).
+  Dopo l'include sono disponibili: foto (elenco ordinato) e copertina (percorso).
+{%- endcomment -%}
+{%- assign cartella = include.viaggio.cartella | default: include.viaggio.slug -%}
+{%- assign prefisso = "/img/viaggi/" | append: cartella | append: "/" -%}
+{%- assign foto = site.static_files | where_exp: "f", "f.path contains prefisso" | sort: "path" -%}
+{%- if include.viaggio.copertina -%}
+  {%- assign copertina = prefisso | append: include.viaggio.copertina -%}
+{%- else -%}
+  {%- assign copertina = foto.first.path -%}
+{%- endif -%}

@@ -1,0 +1,10 @@
+---
+layout: null
+permalink: /versione.json
+sitemap: false
+---
+{%- comment -%}
+  Versione del sito (cambia a ogni pubblicazione). Home e notiziario la
+  confrontano con la propria per ricaricarsi se il browser ne mostra una vecchia.
+{%- endcomment -%}
+{"versione": "{{ site.time | date: '%Y%m%d%H%M%S' }}"}
